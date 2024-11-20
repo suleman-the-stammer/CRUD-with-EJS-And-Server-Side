@@ -10,17 +10,17 @@
 </head>
 
 <body class="w-full h-full text-white bg-zinc-900 p-10">
-    <form action="create" method="post">
+    <form action="/update/<%= user._id %>" method="post">
         <div>
-            <a class="text-blue-500" href="/read">Read Users</a>
-            <h1 class="text-3xl mt-5 mb-5">Create User</h1>
+            <a class="text-blue-500" href="/">Home</a>
+            <h1 class="text-3xl mt-5 mb-5">Update User</h1>
             <input class="px-5 block mb-5 py-2 bg-zinc-800 rounded-lg border-2 border-zinc-800 outline-none"
-                placeholder="Name" name="name" type="text" />
+                placeholder="Name" name="name" value="<%= user.name %>" type="text" />
             <input class="px-5 px-5 block mb-5 py-2 bg-zinc-800 rounded-lg border-2 border-zinc-800 outline-none"
-                placeholder="Email" name="email" type="text" />
+                placeholder="Email" name="email" value="<%= user.email %>" type="text" />
             <input class="px-5 px-5 block mb-5 py-2 bg-zinc-800 rounded-lg border-2 border-zinc-800 outline-none"
-                placeholder="Image Url" name="image" type="text" />
-            <input class="px-5 px-5 block mb-5 py-2 bg-blue-500 rounded-lg" value="Create User" type="submit" />
+                placeholder="Image Url" name="image" value="<%= user.image %>" type="text" />
+            <input class="px-5 px-5 block mb-5 py-2 bg-yellow-500 rounded-lg" value="Update User" type="submit" />
         </div>
     </form>
 </body>

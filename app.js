@@ -11,15 +11,35 @@ app.use(express.static(path.join(__dirname , 'public')));
 app.get('/' , (req, res)=>{
     res.render("index")
 })
-app.get('/read' , (req, res)=>{
-    res.render('read')
+app.get('/read' , async (req, res)=>{
+    let users = await userModel.find();
+    res.render("read" , {users})
 })
-app.post('/create' , function(req , res){
+app.post('/create' , async function(req , res){
     let {name , email , image } = req.body;
-    let newUser = userModel.create({
+    let newUser = await userModel.create({
         name,
         email,
         image
     });
+    res.redirect("/read")
+})
+app.get('/edit/:userid' , async function (req, res) {
+    let user = await userModel.findOne({_id: req.params.userid});
+    res.render("edit" , {user})
+})
+
+app.post('/update/:userid' , async function (req,res) { 
+    let {name , email , image} = req.body;
+    let user = await userModel.findOneAndUpdate({_id: req.params.userid} , {name, email , image} , {new: true})
+    res.redirect("/read ")
+})
+app.get('/delete/:id' , async function(req, res){
+    let users = await userModel.findOneAndDelete({_id: req.params.id});
+    res.redirect("/read");
+
 })
 app.listen(3000)
+
+// {new:true} are use to get new entity
+// In html tag , "value" attribute are you to print/show value 
